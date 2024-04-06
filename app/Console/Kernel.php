@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('queue:restart')->everyMinute();
         $schedule->command('load:data')->everyMinute();
         $schedule->command('process:data')->everyMinute();
+
         $schedule->command('text:analysis')->everyMinute();
         $schedule->command('update:source')->everyMinute();
     }
