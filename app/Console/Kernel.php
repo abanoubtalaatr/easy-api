@@ -20,11 +20,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('queue:restart')->everyMinute();
-        $schedule->command('load:data')->everyMinute();
-        $schedule->command('process:data')->everyMinute();
-
-        $schedule->command('text:analysis')->everyMinute();
-        $schedule->command('update:source')->everyMinute();
+        $schedule->command('load:data')->daily();
+        $schedule->command('process:data')->daily();
+        $schedule->command('text:analysis')->daily();
+        $schedule->command('update:source')->daily();
     }
 
     /**
