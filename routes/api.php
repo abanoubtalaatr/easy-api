@@ -19,6 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('load-data', [\App\Http\Controllers\Api\LoadDataController::class,'index'])->name('load_data');
-Route::post('open-ai-api/{}', [\App\Http\Controllers\Api\OpenAIController::class,'analyzeSentiment'])->name('open_ai_api');
 Route::post('process-data', [\App\Http\Controllers\Api\DataProcessingController::class,'processRows']);
 Route::post('analysis-data',[\App\Http\Controllers\Api\TextAnalysisController::class,'fetchTextAndAnalyze']);
