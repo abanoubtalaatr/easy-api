@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 class RestartQueueCommand extends Command
 {
@@ -17,6 +18,7 @@ class RestartQueueCommand extends Command
         Artisan::call('queue:restart');
 
         // Start the queue workers
+        Log::info('queue restart');
         Artisan::call('queue:work');
     }
 }
