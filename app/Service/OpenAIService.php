@@ -33,7 +33,7 @@ class OpenAIService
             $decodedResponse = json_decode($response->getBody(), true);
             $result = $decodedResponse['choices'][0]['message']['content'] ?? 'unknown';
 
-            return response()->json(['result' => $result]);
+            return $result;
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
