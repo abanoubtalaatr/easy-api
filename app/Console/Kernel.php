@@ -20,6 +20,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('queue:restart')->everyMinute();
+
+        $fetchCount = env('NUMBER_OF_PAGE', 100);
+
+        $schedule->command('load:data --count=' . $fetchCount)
+            ->daily();
+
         $schedule->command('load:data')->daily();
         $schedule->command('process:data')->daily();
         $schedule->command('text:analysis')->daily();
@@ -31,7 +37,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

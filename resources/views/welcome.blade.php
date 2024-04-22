@@ -12,6 +12,7 @@
 
     </head>
     <body class="antialiased">
+        {{now()}}
     <div id="countdown">Starting requests...</div>
     <div id="currentPage"></div>
     <div id="remainingPages"></div>
@@ -26,7 +27,7 @@
 
                 function fetchData(pageNo) {
                     $.ajax({
-                        url: "{{route('load_data')}}", // Ensure this points to your PHP script for fetching and processing API data
+                        // url: "{{route('load_data')}}", // Ensure this points to your PHP script for fetching and processing API data
                         type: 'GET',
                         data: { page_no: pageNo },
                         success: function(response) {
