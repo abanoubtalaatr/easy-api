@@ -24,9 +24,8 @@ class Kernel extends ConsoleKernel
         $fetchCount = env('NUMBER_OF_PAGE', 100);
 
         $schedule->command('load:data --count=' . $fetchCount)
-            ->dailyAt('19:9');
+            ->daily();
 
-        $schedule->command('load:data')->daily();
         $schedule->command('process:data')->daily();
         $schedule->command('text:analysis')->daily();
         $schedule->command('update:source')->daily();
