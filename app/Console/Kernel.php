@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('update:source')->daily();
 
         // google map get reviews about branches and update information
-        $schedule->command('google-map-branches:update-reviews')->everyMinute();
+        $schedule->command('google-map-branches:update-reviews')->daily();
     }
 
     /**
