@@ -17,7 +17,7 @@ class GooglePlacesController extends Controller
         if ($category) {
             $place = GoogleMapPlaces::query()->find($category);
             $apiKey = env("GOOGLE_API");
-            $apiUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?location=23.8859,45.0792&types=food&query=$place->keyword&key=$apiKey";
+            $apiUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?location=23.8859,45.0792&query=$place->keyword&key=$apiKey";
 
             Log::info('url ' . $apiUrl);
             $response = Http::get($apiUrl);
