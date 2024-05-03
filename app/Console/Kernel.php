@@ -29,6 +29,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('process:data')->daily();
         $schedule->command('text:analysis')->daily();
         $schedule->command('update:source')->daily();
+
+        // google map get reviews about branches and update information
+        $schedule->command('google-map-branches:update-reviews')->everyMinute();
     }
 
     /**
