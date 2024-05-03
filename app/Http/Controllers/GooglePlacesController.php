@@ -6,6 +6,7 @@ use App\Models\GoogleMapPlaceBranches;
 use App\Models\GoogleMapPlaces;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class GooglePlacesController extends Controller
 {
@@ -15,13 +16,11 @@ class GooglePlacesController extends Controller
 
         if ($category) {
             $apiKey = env("GOOGLE_API");
-            $apiUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
-
+            $apiUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location=23.8859,45.0792&types=food';
+            Log::info('url ' . $apiUrl);
             $response = Http::get($apiUrl, [
                 'query' => $category,
                 'key' => $apiKey,
-                'location' => "23.8859,45.0792",
-                'types' => 'food'
             ]);
 
             $places = $response->json()['results'];
