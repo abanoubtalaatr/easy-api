@@ -20,6 +20,7 @@ class GooglePlacesController extends Controller
             $response = Http::get($apiUrl, [
                 'query' => $category,
                 'key' => $apiKey,
+                'location' => "23.8859,45.0792",
             ]);
 
             $places = $response->json()['results'];
