@@ -21,6 +21,7 @@ class GooglePlacesController extends Controller
                 'query' => $category,
                 'key' => $apiKey,
                 'location' => "23.8859,45.0792",
+                'types' => 'food'
             ]);
 
             $places = $response->json()['results'];
