@@ -43,6 +43,7 @@ Route::get('google-map-review', function (Request $request) {
 
         // Process the response data
         $data = json_decode($response->getBody(), true);
+
         if (isset($data['result'])) {
             $information['formatted_address'] = $data['result']['formatted_address'];
             $information['geometry'] = $data['result']['geometry'];
