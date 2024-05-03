@@ -28,30 +28,30 @@ class GoogleMapBranchReviewsJob implements ShouldQueue
         $branches = GoogleMapPlaceBranches::query()->get();
         $client = new Client();
 
-        foreach ($branches as $branch) {
-
+        foreach ($branches as $key => $branch) {
             $url .= $branch->id . '&fields=' . $fields . '&key=' . $apiKey;
 
             $response = $client->request('GET', $url);
 
             // Process the response data
             $data = json_decode($response->getBody(), true);
-            $information['formatted_address'] = $data['result']['formatted_address'];
-            $information['geometry'] = $data['result']['geometry'];
-            $information['name'] = $data['result']['name'];
-            $information['types'] = $data['result']['types'];
+            if (isset($data['result'])) {
+                $information['formatted_address'] = $data['result']['formatted_address'];
+                $information['geometry'] = $data['result']['geometry'];
+                $information['name'] = $data['result']['name'];
+                $information['types'] = $data['result']['types'];
 
-            foreach ($data['result']['reviews'] as $review) {
-                GoogleMapBranchReview::query()->create([
-                    'google_map_place_branche_id' => $branch->id,
-                    'username' => $review['author_name'],
-                    'rating' => $review['rating'],
-                    'text' => $review['text'],
-                ]);
+                foreach ($data['result']['reviews'] as $review) {
+                    GoogleMapBranchReview::query()->create([
+                        'google_map_place_branche_id' => $branch->id,
+                        'username' => $review['author_name'],
+                        'rating' => $review['rating'],
+                        'text' => $review['text'],
+                    ]);
+                }
+                $branch->update(['information' => $information]);
             }
-            $branch->update(['information' => $information]);
-
-            Log::info('review update done for branches');
+            sleep(30);
         }
     }
 }
