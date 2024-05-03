@@ -141,7 +141,7 @@
                                 });
                             const label = $("<label>")
                                 .attr("for", "place_" + index)
-                                .text(place.name);
+                                .text(place.name  . ' ' . place.formatted_address);
 
                             const checkboxContainer = $(
                                     "<div class='d-flex align-items-center'>"
